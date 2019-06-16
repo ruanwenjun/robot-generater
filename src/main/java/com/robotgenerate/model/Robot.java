@@ -11,7 +11,7 @@ import java.util.Map;
 @Builder
 public class Robot {
 
-	private String controller;
+	private Class controllerClass ;
 
 	private Settings settings;
 

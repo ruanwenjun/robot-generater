@@ -10,8 +10,7 @@ import java.util.List;
 @Builder
 public class ControllerObject {
 
-
-	private String className;
+	private Class controllerClass;
 
 	private String packageName;
 
