@@ -23,7 +23,7 @@ public class RobotGenerater {
      * @param packageName
      * @return
      */
-    public List<Robot> generate(String packageName) {
+    private List<Robot> generate(String packageName) {
         List<Class> allClass = PackageUtils.getAllClassNames(packageName);
         return allClass.stream().filter(cla ->
             AnnotationUtils.classContainAnnotation(cla, RestController.class)
@@ -134,11 +134,14 @@ public class RobotGenerater {
             .build();
     }
 
+    public void run(String pack, String dir) {
+        List<Robot> robots = generate(pack);
+        RobotWriter.generateRobotFile(robots, dir);
+    }
+
     public static void main(String[] args) {
         RobotGenerater robotGenerater = new RobotGenerater();
-        List<Robot> robots = robotGenerater.generate("com.robotgenerate");
-        String dst = "/Users/ruanwenjun/Project/Github-Project/robot-generater/src/main/java/com/robotgenerate/controller";
-        RobotWriter.generateRobotFile(robots, dst);
+        robotGenerater.run("com.robotgenerate", robotGenerater.getClass().getResource("/").toString().substring(5));
     }
 
 }
